@@ -1,3 +1,50 @@
-body {
+.expo{
+    vertical-align:super;
+   }
+   
+   body {
+    background-color:black;
     margin: 0;
-}
+   }
+   
+   #webgl{
+    border:solid 2px #0091ff;
+    background-color:black;
+   }
+   
+   #TableauCamera{
+    text-align:center;
+    border : solid #0091ff 2px;
+    background-color:#0091ff;
+    border-collapse:collapse;
+   }
+   
+   #TableauCamera td, #TableauCamera th{
+    border : solid #0091ff 1px;
+   }
+   
+   input[type='number']{
+    width:5cm;
+    background-color:rgb(60, 60, 60);
+    color:white;
+   }
+   input[type='button']{
+    margin-left:1cm;
+    margin-top:0.2cm;
+    width:5cm;
+    background-color:#99FF99;
+    color:#0091ff;
+   }
+   #divBouton{
+    float:right;
+   }
+   #controleRepere{
+    float:left;
+    margin-right:1cm;
+    border : solid 3px #FFFF00;
+   }
+   fieldset{
+    color : white;
+    background-color:black;
+    font-weight:900;
+   }
