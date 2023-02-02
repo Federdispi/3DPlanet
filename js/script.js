@@ -37,15 +37,15 @@ const matriceInversion = new THREE.Matrix4().getInverse(new THREE.Matrix4());
 // Inversion de la sphère pour obtenir un plan
 largerBallGeometry.applyMatrix(matriceInversion);
 
-// Points de contrôle de la courbe de Bézier
-const point1 = new THREE.Vector3(-0.5, 0, 0);
-const point2 = new THREE.Vector3(0, 0.5, 0);
-const point3 = new THREE.Vector3(0.5, 0, 0);
-
 // Poids de la courbe de Bézier
 const weight1 = 1;
 const weight2 = 1;
 const weight3 = 1;
+
+// Points de contrôle de la courbe de Bézier
+const point1 = new THREE.Vector3(-0.5, 0, 0).multiplyScalar(weight1);
+const point2 = new THREE.Vector3(0, 0.5, 0).multiplyScalar(weight2);
+const point3 = new THREE.Vector3(0.5, 0, 0).multiplyScalar(weight3);
 
 // On trace la courbe de Bézier y1 dans le plan
 const curve = new THREE.QuadraticBezierCurve3(point1, point2, point3);
@@ -80,20 +80,20 @@ animate();
 
 // Menu GUI
 let gui = new dat.GUI();
- let menuGUI = new function () {
-  this.cameraxPos = camera.position.x;
-  this.camerayPos = camera.position.y;
-  this.camerazPos = camera.position.z;
-  this.cameraZoom = 1;
-  this.cameraxDir = 0;
-  this.camerayDir = 0;
-  this.camerazDir = 0;
+let menuGUI = new function () {
+this.cameraxPos = camera.position.x;
+this.camerayPos = camera.position.y;
+this.camerazPos = camera.position.z;
+this.cameraZoom = 1;
+this.cameraxDir = 0;
+this.camerayDir = 0;
+this.camerazDir = 0;
 
-  this.actualisation = function () {
-    posCamera();
-    reAffichage();
-  };
- };
+this.actualisation = function () {
+  posCamera();
+  reAffichage();
+};
+};
 
- ajoutCameraGui(gui, menuGUI, camera);
+ajoutCameraGui(gui, menuGUI, camera);
 }
