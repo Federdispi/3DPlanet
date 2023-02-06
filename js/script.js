@@ -20,7 +20,7 @@ camera.position.set(0, 0, 15);
 
 // Création de la grande sphère
 var largerBallGeometry = new THREE.SphereGeometry(1, 32, 32);
-var largerBallMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+var largerBallMaterial = new THREE.MeshBasicMaterial({ color: 0x61f29d });
 var largerBall = new THREE.Mesh(largerBallGeometry, largerBallMaterial);
 
 // Création de la petite sphère
@@ -32,20 +32,33 @@ scene.add(largerBall);
 scene.add(smallerBall);
 
 // Matrice d'inversion
-const matriceInversion = new THREE.Matrix4().getInverse(new THREE.Matrix4());
+var radius = 1;
+var center = new THREE.Vector3(0, 0, 0);
+var matriceInversion = new THREE.Matrix4().getInverse(new THREE.Matrix4());
+ matriceInversion = new THREE.Matrix4().set(
+  1 / (center.x * center.x + center.y * center.y + center.z * center.z - radius * radius), 0, 0, 0,
+  0, 1 / (center.x * center.x + center.y * center.y + center.z * center.z - radius * radius), 0, 0,
+  0, 0, 1 / (center.x * center.x + center.y * center.y + center.z * center.z - radius * radius), 0,
+  0, 0, 0, 1 
+);
 
 // Inversion de la sphère pour obtenir un plan
 largerBallGeometry.applyMatrix(matriceInversion);
 
 // Points de contrôle de la courbe de Bézier
-const point1 = new THREE.Vector3(-0.5, 0, 0);
-const point2 = new THREE.Vector3(0, 0.5, 0);
-const point3 = new THREE.Vector3(0.5, 0, 0);
+const point1 = new THREE.Vector3(-1, 0, 0);
+const point2 = new THREE.Vector3(0, 1, 0);
+const point3 = new THREE.Vector3(1, 0, 0);
 
 // Poids de la courbe de Bézier
 const weight1 = 1;
 const weight2 = 1;
 const weight3 = 1;
+
+// Application des poids
+point1.multiplyScalar(weight1);
+point2.multiplyScalar(weight2);
+point3.multiplyScalar(weight3);
 
 // On trace la courbe de Bézier y1 dans le plan
 const curve = new THREE.QuadraticBezierCurve3(point1, point2, point3);
